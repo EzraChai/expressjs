@@ -4,8 +4,13 @@ const express = require('express');
 const routes = new express.Router();
 
 // Add routes
-routes.get('/', function(req, res) {
-    res.send("GET");
+routes.get('/', function(req, res,next) {
+    try {
+        res.send("GET");
+        throw new Error("JIBAI")
+    } catch (error) {
+        next(error);        
+    }
 });
 
 routes.post('/', function(req, res) {
