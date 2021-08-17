@@ -4,6 +4,7 @@
  */
 exports.getProfile = async (req, res, next) => {
     try {
+        JSON.parse("sdadasflasd")
         res.send('GET PROFILE');
     } catch (error) {
         next(error);

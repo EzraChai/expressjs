@@ -17,7 +17,13 @@
  */ 
 exports.register = async (req, res, next) => {
     try {
-        // 处理请求
+        //1. 获取请求体数据
+        console.log(req.body.user)
+        const user = req.body.user;
+        
+        //2. 数据验证
+        //3. 验证通过，将数据保存到数据库
+        //4. 发送成功响应
         res.send("USER REGISTER")
     } catch (error) {
         next(error);
