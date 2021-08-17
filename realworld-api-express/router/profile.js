@@ -1,39 +1,22 @@
 const express = require('express');
+const ProfileController = require('../controller/profile')
 
 const router = express.Router();
 
 /**
  * Get Profile
  */
-router.get('/:username', async (req, res, next) => {
-    try {
-        res.send('GET PROFILE')
-    } catch (error) {
-        next(error);
-    }
-})
+router.get('/:username', ProfileController.getProfile)
 
 /**
  * Follow User
  */
-router.post('/:username/follow', async (req, res, next) => {
-    try {
-        res.send('Follow User'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
+router.post('/:username/follow', ProfileController.followUser)
 
 /**
  * Unfollow User
  */
-router.delete('/:username/follow', async (req, res, next) => {
-    try {
-        res.send('Unfollow User'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
+router.delete('/:username/follow', ProfileController.unfollowUser)
 
 
 

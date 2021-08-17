@@ -1,128 +1,62 @@
 const express = require('express');
+const ArticleController = require('../controller/article');
 
 const router = express.Router();
 
 /**
  * Get Articles
  */
- router.get('/', async (req, res, next) => {
-    try {
-        res.send('GET ARTICLES')
-    } catch (error) {
-        next(error);
-    }
-})
+ router.get('/', ArticleController.getArticles)
 
 /**
  * Feed Articles
  */
- router.get('/feed', async (req, res, next) => {
-    try {
-        res.send('FEED ARTICLES')
-    } catch (error) {
-        next(error);
-    }
-})
+ router.get('/feed', ArticleController.getFeedsArticles)
 
 /**
  * Get Article
  */
- router.get('/:slug', async (req, res, next) => {
-    try {
-        res.send('GET ARTICLE')
-    } catch (error) {
-        next(error);
-    }
-})
+ router.get('/:slug', ArticleController.getArticle)
 
 /**
  * Create Article
  */
- router.post('/', async (req, res, next) => {
-    try {
-        res.send('CREATE ARTICLE')
-    } catch (error) {
-        next(error);
-    }
-})
+ router.post('/', ArticleController.createArticle)
 
 /**
  * Update Article
  */
- router.put('/:slug', async (req, res, next) => {
-    try {
-        res.send('UPDATE ARTICLE')
-    } catch (error) {
-        next(error);
-    }
-})
+ router.put('/:slug', ArticleController.updateArticle)
 
 /**
  * Delete Article
  */
- router.put('/:slug', async (req, res, next) => {
-    try {
-        res.send('DELETE ARTICLE')
-    } catch (error) {
-        next(error);
-    }
-})
+ router.put('/:slug', ArticleController.deleteArticle)
 
 /**
  * Add Comments to an Article
  */
- router.post('/:slug/comments', async (req, res, next) => {
-    try {
-        res.send('Add Comments to an Article'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
+ router.post('/:slug/comments', ArticleController.addComments)
 
 /**
  * Get Comments from an Article
  */
- router.get('/:slug/comments', async (req, res, next) => {
-    try {
-        res.send('Get Comments from an Article'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
+ router.get('/:slug/comments', ArticleController.deleteComment)
 
 /**
  * Delete Comment
  */
- router.delete('/:slug/comments/:id', async (req, res, next) => {
-    try {
-        res.send('Delete Comment'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
+ router.delete('/:slug/comments/:id', ArticleController.deleteComment)
 
 /**
  * Favorite Article
  */
- router.post('/:slug/favorite', async (req, res, next) => {
-    try {
-        res.send('Add Comments to an Article'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
+ router.post('/:slug/favorite', ArticleController.addFavoriteArticle)
 
 /**
  * Unfavorite Article
  */
- router.delete('/:slug/favorite', async (req, res, next) => {
-    try {
-        res.send('Delete Comment'.toUpperCase)
-    } catch (error) {
-        next(error);
-    }
-})
-
+ router.delete('/:slug/favorite', ArticleController.unfavoriteArticle)
 
 
 module.exports = router

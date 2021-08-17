@@ -1,17 +1,11 @@
 const express = require('express');
+const TagController = require('../controller/tag');
 
 const router = express.Router();
 
 /**
  * Get Tags
  */
- router.get('/', async (req, res, next) => {
-    try {
-        // 处理请求
-        res.send("GET TAGS")
-    } catch (error) {
-        next(error);
-    }
-})
+ router.get('/', TagController.getTags)
 
 module.exports = router

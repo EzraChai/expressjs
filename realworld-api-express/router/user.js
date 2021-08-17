@@ -1,53 +1,26 @@
 const express = require('express');
+const UserController = require('../controller/user');
 
 const router = express.Router();
 
 /**
  * Login
  */
-router.post('/users/login', async (req, res, next) => {
-    try {
-        // 处理请求
-        res.send("USERS LOGIN")
-    } catch (error) {
-        next(error);
-    }
-})
+router.post('/users/login', UserController.login);
 
 /**
  * User Register
  */
-router.post('/users', async (req, res, next) => {
-    try {
-        // 处理请求
-        res.send("USER REGISTER")
-    } catch (error) {
-        next(error);
-    }
-})
+router.post('/users', UserController.register)
 
 /**
  * Get Current User
  */
-router.get('/user', async (req, res, next) => {
-    try {
-        // 处理请求
-        res.send("GET CURRENT USER")
-    } catch (error) {
-        next(error);
-    }
-})
+router.get('/user', UserController.getCurrentUser)
 
 /**
  * Update User
  */
-router.put('/user', async (req, res, next) => {
-    try {
-        // 处理请求
-        res.send("UPDATE USER")
-    } catch (error) {
-        next(error);
-    }
-})
+router.put('/user',UserController.updateUser)
 
 module.exports = router;
