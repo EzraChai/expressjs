@@ -1,3 +1,5 @@
+const { User } = require('../model')
+const validator = require('validator');
 
 /**
  * User Login
@@ -19,12 +21,21 @@ exports.register = async (req, res, next) => {
     try {
         //1. 获取请求体数据
         console.log(req.body.user)
-        const user = req.body.user;
-        
+
         //2. 数据验证
+        validator
+
         //3. 验证通过，将数据保存到数据库
+        const user = new User(req.body.user)
+
+
+        //保存到数据库
+        await user.save();
+
         //4. 发送成功响应
-        res.send("USER REGISTER")
+        res.status(201).json({
+            user 
+        })
     } catch (error) {
         next(error);
     }
