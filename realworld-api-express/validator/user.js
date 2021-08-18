@@ -2,7 +2,6 @@ const { body, header } = require('express-validator');
 const validate = require('../middleware/validate')
 const { User } = require('../model')
 const MD5 = require('../util/md5')
-const secretKey = require('../config/config.default')
 
 
 exports.register = validate([

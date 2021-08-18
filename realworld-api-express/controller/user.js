@@ -14,7 +14,7 @@ const {jwtSecret} = require('../config/config.default');
 
         const token = await jwt.sign({
             userId: user._id,
-        },jwtSecret,{algorithm: 'HS512'});
+        },jwtSecret,{algorithm: 'HS512',expiresIn: '60d'});
         console.log(token);
 
         delete user.password

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const baseModel  = require('./base-model')
+const Schema = mongoose.Schema
 
 /**
  * Example
@@ -27,21 +28,30 @@ const baseModel  = require('./base-model')
  */
 
 const articleSchema = new mongoose.Schema({
-    slug: {
-        type: String,
-        required: true,
-    },
     title: {
         type: String,
         required: true,
     },
     description: {
         type: String,
-        default: null,
+        required: true,
     },
     body: {
         type: String,
-        default: null,
+        required: true,
+    },
+    favoriteCount:{
+      type: Number,
+      default: 0,
+    },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    tagList: {
+      type: [String],
+      default: null,
     },
     ...baseModel
 });

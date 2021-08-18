@@ -1,6 +1,7 @@
 const express = require('express');
 const ArticleController = require('../controller/article');
-const auth = require('../middleware/header')
+const auth = require('../middleware/header');
+const articleValidator = require('../validator/article');
 
 const router = express.Router();
 
@@ -17,47 +18,47 @@ router.get('/feed', auth, ArticleController.getFeedsArticles)
 /**
  * Get Article
  */
-router.get('/:slug', ArticleController.getArticle)
+router.get('/:articleId',articleValidator.getArticle, ArticleController.getArticle)
 
 /**
  * Create Article
  */
-router.post('/', auth, ArticleController.createArticle)
+router.post('/', auth, articleValidator.createArticle, ArticleController.createArticle)
 
 /**
  * Update Article
  */
-router.put('/:slug', auth, ArticleController.updateArticle)
+router.put('/:articleId', auth,articleValidator.updateArticle, ArticleController.updateArticle)
 
 /**
  * Delete Article
  */
-router.put('/:slug', auth, ArticleController.deleteArticle)
+router.put('/:articleId', auth,articleValidator.getArticle, ArticleController.deleteArticle)
 
 /**
  * Add Comments to an Article
  */
-router.post('/:slug/comments', auth, ArticleController.addComments)
+router.post('/:articleId/comments', auth,articleValidator.getArticle, ArticleController.addComments)
 
 /**
  * Get Comments from an Article
  */
-router.get('/:slug/comments', ArticleController.deleteComment)
+router.get('/:articleId/comments',articleValidator.getArticle, ArticleController.deleteComment)
 
 /**
  * Delete Comment
  */
-router.delete('/:slug/comments/:id', auth, ArticleController.deleteComment)
+router.delete('/:articleId/comments/:id', auth,articleValidator.getArticle, ArticleController.deleteComment)
 
 /**
  * Favorite Article
  */
-router.post('/:slug/favorite', auth, ArticleController.addFavoriteArticle)
+router.post('/:articleId/favorite', auth,articleValidator.getArticle, ArticleController.addFavoriteArticle)
 
 /**
  * Unfavorite Article
  */
-router.delete('/:slug/favorite', auth, ArticleController.unfavoriteArticle)
+router.delete('/:articleId/favorite', auth,articleValidator.getArticle, ArticleController.unfavoriteArticle)
 
 
 module.exports = router
