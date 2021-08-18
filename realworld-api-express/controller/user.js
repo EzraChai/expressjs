@@ -1,13 +1,27 @@
 const { User } = require('../model')
 const validator = require('validator');
+const jwt = require('../util/jwt');
+const {jwtSecret} = require('../config/config.default');
 
 /**
  * User Login
  */ 
  exports.login = async (req, res, next) => {
     try {
-        // 处理请求
-        res.send("USER LOGIN")
+        //2. 生成 token
+        const user = req.user.toJSON();
+        console.log("Id",user._id);
+
+        const token = await jwt.sign({
+            userId: user._id,
+        },jwtSecret,{algorithm: 'HS512'});
+        console.log(token);
+
+        delete user.password
+        res.status(200).json({
+            ...user,
+            token
+        })
     } catch (error) {
         next(error);
     }
@@ -26,11 +40,14 @@ exports.register = async (req, res, next) => {
         validator
 
         //3. 验证通过，将数据保存到数据库
-        const user = new User(req.body.user)
+        let user = new User(req.body.user)
 
 
         //保存到数据库
         await user.save();
+
+        user = user.toJSON();
+        delete user.password
 
         //4. 发送成功响应
         res.status(201).json({
@@ -47,8 +64,7 @@ exports.register = async (req, res, next) => {
  */ 
 exports.getCurrentUser = async (req, res, next) => {
     try {
-        // 处理请求
-        res.send("GET CURRENT USER")
+        res.status(200).json({user: req.user})
     } catch (error) {
         next(error);
     }
